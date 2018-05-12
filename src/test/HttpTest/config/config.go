@@ -1,7 +1,7 @@
-package main
+package config
 
 import (
-	"test/HttpTest/config"
+	"test/HttpTest/core/config"
 )
 type ConfigInterface interface {
 	ParseConfig(fileName string)
@@ -17,6 +17,7 @@ type AppConfig struct {
 	APP_DEBUG bool
 
 	ROOM_ID int
+	APP_MULTIPLE bool
 }
 
 type EnvConfig struct {
@@ -41,6 +42,7 @@ func (this *AppConfig)ParseConfig(fileName string)  {
 	this.APP_DEBUG = iniconf.DefaultBool("APP_DEBUG",true)
 	this.ROOM_ID = iniconf.DefaultInt("ROOM_ID", 10001)
 
+	this.APP_MULTIPLE = iniconf.DefaultBool("APP_MULTIPLE", false)
 }
 
 func (this *EnvConfig)ParseConfig(fileName string) {
@@ -54,5 +56,5 @@ func (this *EnvConfig)ParseConfig(fileName string) {
 	this.APP_SECRET = iniconf.DefaultString("APP_SECRET", "")
 }
 
-var g_appConfig  = new(AppConfig)
-var g_envConfig  = new(EnvConfig)
+var G_appConfig  = new(AppConfig)
+var G_envConfig  = new(EnvConfig)
